@@ -1,9 +1,6 @@
 import "../css/App.css";
 
-const ProductCard = ({ product }) => {
-
-  const { tipoProducto, nombre, precio, imagen, stock, descripcion } = product;
-  const DEFAULT_IMAGES = {
+const DEFAULT_IMAGES = {
     DISCO:
       "https://upload.wikimedia.org/wikipedia/commons/5/5c/Disco_de_Vinilo.jpg", 
     INSTRUMENTO:
@@ -13,6 +10,10 @@ const ProductCard = ({ product }) => {
     NOT_FOUND: 
       "https://open.music-worx.com/static/img/label-img.jpeg",
   };
+
+const ProductCard = ({ product }) => {
+
+  const { tipoProducto, nombre, precio, imagen, stock, descripcion } = product;
   const imageUrl = imagen || DEFAULT_IMAGES[tipoProducto] || DEFAULT_IMAGES["NOT_FOUND"];
 
   return (
