@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
-import "../css/App.css";
+import "../css/Catalog.css";
 import Sidebar from "../components/SidebarFilter";
 import { ClipLoader } from "react-spinners";
 

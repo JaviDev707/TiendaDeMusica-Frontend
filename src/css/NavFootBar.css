@@ -1,0 +1,28 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    z-index: 100;
+}
+
+.logo{
+    font-size: 24px;
+    font-weight: bold;
+    color: darkslateblue;
+}
+
+.navbar a{
+    margin-right: 50px;
+    position: relative;
+    font-size: 20px;
+    color: darkslateblue;
+    text-decoration: none;
+}
+
+.footbar {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: darkslateblue;
+}

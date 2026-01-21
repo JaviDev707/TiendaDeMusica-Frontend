@@ -3,27 +3,24 @@ import Home from './pages/Home.jsx';
 import Catalog from './pages/Catalog.jsx';
 import UserProfile from './pages/UserProfile.jsx';
 import Cart from './pages/Cart.jsx';
+import Navbar from './components/Navbar.jsx';
+import Footbar from './components/Footbar.jsx';
 
 function App() {
 
   return (
     <>
       <Router>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/catalog">Catalog</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/cart">Cart</Link></li>
-          </ul>
-        </nav>
-
+        <Navbar />
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
+
+        <Footbar />
       </Router>
     </>
   )

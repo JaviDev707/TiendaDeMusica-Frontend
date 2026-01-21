@@ -1,4 +1,4 @@
-import "../css/App.css";
+import "../css/Catalog.css";
 
 const DEFAULT_IMAGES = {
     DISCO:
@@ -83,7 +83,7 @@ const ProductCard = ({ product }) => {
     </div>
   );
 };
-
+/*
 const cardStyle = {
   border: "1px solid #ddd",
   borderRadius: "8px",
@@ -100,5 +100,5 @@ const imageStyle = {
   objectFit: "cover",
   borderRadius: "4px",
 };
-
+*/
 export default ProductCard;
