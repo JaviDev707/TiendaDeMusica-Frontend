@@ -71,7 +71,7 @@ const Catalog = () => {
   const varios = productosFiltrados.filter((p) => p.tipoProducto === "VARIOS");
   
   return (
-    <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+    <div className="catalog-layout">
       {/* Sidebar */}
       <Sidebar 
         busqueda={busqueda} setBusqueda={setBusqueda}

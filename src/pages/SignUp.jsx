@@ -1,20 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import {
-  Container,
-  Box,
-  Avatar,
-  Typography,
-  TextField,
-  Button,
-  FormControlLabel,
-  Checkbox,
-  Grid,
-  Link,
+  Container, Box, Avatar, Typography,
+  TextField, Button, FormControlLabel, Checkbox
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-function Login() {
+function SignUp() {
+
   const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -24,48 +17,45 @@ function Login() {
     const password = data.get("password");
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:8080/api/auth/register", {
+        email,
+        password,
+      });
 
       const token = response.data.token;
 
-      // Guardo el token en localStorage
+      // Guardo el token en localStorage 
       localStorage.setItem("token", token);
 
-      window.location.reload();
-      console.log("Usuario logeado ✅, token:", token);
-      alert("✅ Usuario logeado con éxito");
+      console.log("Usuario registrado ✅, token:", token);
+      alert("✅ Usuario registrado con éxito");
+
     } catch (err) {
-      alert("❌ Usuario o contraseña incorrectos/as.");
-      console.error("Error al logear:", err);
-      setError("No se pudo logear. Intenta de nuevo.");
+      if (err.response && err.response.status === 400) {
+        alert("⚠️ El usuario ya está registrado");
+      } else {
+        alert("❌ Error al registrar. Intentalo de nuevo.");
+        console.error("Error al registrar:", err);
+        setError("No se pudo registrar. Intenta de nuevo.");
+      }
     }
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{ minHeight: "100vh", padding: "40px" }}
-    >
+    <Container component="main" maxWidth="xs" style={{ padding: "40px" }}>
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Iniciar sesión
+          Crear cuenta
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -100,16 +90,10 @@ function Login() {
           >
             Sign In
           </Button>
-          <Grid container style={{ marginTop: "20px" }}>
-            <Grid item>
-              <Link href="/registro" variant="body2">
-                {"No tienes cuenta? Registrate!"}
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
     </Container>
   );
 }
-export default Login;
+
+export default SignUp;

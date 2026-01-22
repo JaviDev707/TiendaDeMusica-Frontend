@@ -1,4 +1,5 @@
 import "../css/NavFootBar.css"
+import { FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
   return (
@@ -8,8 +9,9 @@ const Navbar = () => {
         <ul className="nav-links">
             <a href="/">Inicio</a>
             <a href="/catalog">Catálogo</a>
-            <a href="/cart">Carrito</a>
+            <a href="/cart"><FaCartShopping /></a>
             <a href="/profile">Perfil</a>
+            <a href="/login">Login</a>
         </ul>
     </nav>
     <hr />

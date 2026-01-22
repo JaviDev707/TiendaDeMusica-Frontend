@@ -1,4 +1,5 @@
 import "../css/Catalog.css";
+import { FaCartPlus } from "react-icons/fa";
 
 const DEFAULT_IMAGES = {
     DISCO:
@@ -17,9 +18,9 @@ const ProductCard = ({ product }) => {
   const imageUrl = imagen || DEFAULT_IMAGES[tipoProducto] || DEFAULT_IMAGES["NOT_FOUND"];
 
   return (
-    <div className="product-card" style={cardStyle}>
+    <div className="product-card">
       <div className="image-container">
-        <img src={imageUrl} alt={nombre} style={imageStyle} />
+        <img src={imageUrl} alt={nombre}/>
         
         {/* Capa que aparece al hacer hover */}
         <div className="description-overlay">
@@ -77,28 +78,11 @@ const ProductCard = ({ product }) => {
         </p>
 
         <button disabled={stock === 0} onClick={() => alert("Añadido!")}>
-          Añadir al carrito
+          <FaCartPlus /> 
         </button>
       </div>
     </div>
   );
 };
-/*
-const cardStyle = {
-  border: "1px solid #ddd",
-  borderRadius: "8px",
-  padding: "15px",
-  width: "220px",
-  textAlign: "center",
-  backgroundColor: "#fff",
-  boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-};
 
-const imageStyle = {
-  width: "180px",
-  height: "180px",
-  objectFit: "cover",
-  borderRadius: "4px",
-};
-*/
 export default ProductCard;

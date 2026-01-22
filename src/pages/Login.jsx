@@ -51,7 +51,7 @@ function Login() {
     <Container
       component="main"
       maxWidth="xs"
-      style={{ minHeight: "100vh", padding: "40px" }}
+      style={{ padding: "40px" }}
     >
       <Box
         sx={{
@@ -102,7 +102,7 @@ function Login() {
           </Button>
           <Grid container style={{ marginTop: "20px" }}>
             <Grid item>
-              <Link href="/registro" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"No tienes cuenta? Registrate!"}
               </Link>
             </Grid>

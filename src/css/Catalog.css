@@ -1,3 +1,11 @@
+.catalog-layout {
+  display: flex;
+  align-items: flex-start; 
+  gap: 20px;
+  padding: 20px;
+  color: darkslateblue;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -6,7 +14,8 @@
 }
 
 .extra-info {
-  background: #f9f9f9;
+  background: rgba(249, 249, 249, 0.2);
+  border: 1px solid #ddd;
   font-size: 0.9em;
   padding: 5px;
   margin: 10px 0;
@@ -18,11 +27,12 @@
 
 .sidebar {
   position: sticky;
-  top: 20px;
+  top: 50px;
   height: fit-content;
   width: 200px;
-  border-radius: 4px;
-  background: #f9f9f9;
+  border-radius: 20px;
+  border: black 1px solid;
+  background: rgba(249, 249, 249, 0.2);
 }
 
 /* Contenedor de la imagen */
@@ -69,9 +79,10 @@
   text-align: center;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: rgba(249, 249, 249, 0.2);
 }
 
-.image-container{
+.image-container img{
   width: 180px;
   height: 180px;
   object-fit: cover;
