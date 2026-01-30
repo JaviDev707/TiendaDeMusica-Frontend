@@ -7,11 +7,14 @@ import Navbar from "./components/Navbar.jsx";
 import Footbar from "./components/Footbar.jsx";
 import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
+
 import "./css/App.css";
+import { CartProvider} from "./context/CartContext.jsx";
+import "./api/AxiosConfig.jsx"; 
 
 function App() {
   return (
-    <>
+    <CartProvider>
       <Router>
         <Navbar />
         <main className="app-main">
@@ -26,7 +29,7 @@ function App() {
         </main>
         <Footbar />
       </Router>
-    </>
+    </CartProvider>
   );
 }
 

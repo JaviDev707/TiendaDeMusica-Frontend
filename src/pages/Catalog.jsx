@@ -82,6 +82,7 @@ const Catalog = () => {
       />
 
       <main style={{ flex: 1 }}>
+
         {/* SECCIÓN DISCOS */}
         {discos.length > 0 && (
           <section>
@@ -119,6 +120,7 @@ const Catalog = () => {
             </div>
           </section>
         )}
+
       </main>
     </div>
   );

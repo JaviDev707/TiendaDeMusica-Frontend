@@ -51,7 +51,7 @@ function SignUp() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: 'darkslateblue' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -86,7 +86,7 @@ function SignUp() {
             type="submit"
             fullWidth
             variant="contained"
-            style={{ backgroundColor: "#bb00ff" }}
+            style={{ backgroundColor: "darkslateblue" }}
           >
             Sign In
           </Button>

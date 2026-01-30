@@ -1,5 +1,6 @@
 import "../css/Catalog.css";
 import { FaCartPlus } from "react-icons/fa";
+import { useCart } from "../context/CartContext";
 
 const DEFAULT_IMAGES = {
     DISCO:
@@ -14,13 +15,14 @@ const DEFAULT_IMAGES = {
 
 const ProductCard = ({ product }) => {
 
-  const { tipoProducto, nombre, precio, imagen, stock, descripcion } = product;
-  const imageUrl = imagen || DEFAULT_IMAGES[tipoProducto] || DEFAULT_IMAGES["NOT_FOUND"];
+  const { tipoProducto, nombre, precio, stock, descripcion, imageUrl } = product;
+  const finalImage = imageUrl || DEFAULT_IMAGES[tipoProducto] || DEFAULT_IMAGES["NOT_FOUND"];
+  const { agregarAlCarrito } = useCart();
 
   return (
     <div className="product-card">
       <div className="image-container">
-        <img src={imageUrl} alt={nombre}/>
+        <img src={finalImage} alt={nombre}/>
         
         {/* Capa que aparece al hacer hover */}
         <div className="description-overlay">
@@ -28,7 +30,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <div className="product-info">
+      <div className="catalog-product-info">
         <h3>{nombre}</h3>
         <p className="price">{precio} €</p>
 
@@ -77,7 +79,7 @@ const ProductCard = ({ product }) => {
           {stock > 0 ? `En stock: ${stock}` : "Agotado"}
         </p>
 
-        <button disabled={stock === 0} onClick={() => alert("Añadido!")}>
+        <button disabled={stock === 0} onClick={() => agregarAlCarrito(product.id, 1)}>
           <FaCartPlus /> 
         </button>
       </div>

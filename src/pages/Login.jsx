@@ -13,9 +13,11 @@ import {
   Link,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,13 +35,12 @@ function Login() {
       );
 
       const token = response.data.token;
-
       // Guardo el token en localStorage
       localStorage.setItem("token", token);
 
-      window.location.reload();
-      console.log("Usuario logeado ✅, token:", token);
+      navigate("/");
       alert("✅ Usuario logeado con éxito");
+
     } catch (err) {
       alert("❌ Usuario o contraseña incorrectos/as.");
       console.error("Error al logear:", err);
@@ -61,7 +62,7 @@ function Login() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <Avatar sx={{ m: 1, bgcolor: "darkslateblue" }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -96,7 +97,7 @@ function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            style={{ backgroundColor: "#bb00ff" }}
+            style={{ backgroundColor: "darkslateblue" }}
           >
             Sign In
           </Button>
