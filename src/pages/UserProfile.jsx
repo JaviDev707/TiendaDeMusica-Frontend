@@ -56,7 +56,7 @@ const UserProfile = () => {
         </h3>
 
         {pedidos.length === 0 ? (
-          <p className="empty-msg">Aún no has realizado ninguna compra.</p>
+          <p className="empty-msg" style={{textAlign:"center"}}>Aún no has realizado ninguna compra.</p>
         ) : (
           <div className="orders-grid">
             {pedidos.map((p) => (

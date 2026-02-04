@@ -4,7 +4,6 @@ import axios from "axios";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-
   const [carrito, setCarrito] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -12,7 +11,7 @@ export const CartProvider = ({ children }) => {
   // Función para cargar el carrito desde la API
   const cargarCarrito = async () => {
     const token = localStorage.getItem("token");
-    if (!token) return; 
+    if (!token) return;
     // Indico que estoy cargando
     setLoading(true);
     try {
@@ -27,7 +26,12 @@ export const CartProvider = ({ children }) => {
   };
   // Cargo el carrito al montar el componente
   useEffect(() => {
-    cargarCarrito();
+    const token = localStorage.getItem("token");
+    if (token) {
+      cargarCarrito();
+    } else {
+      setLoading(false); 
+    }
   }, []);
 
   // Funciones para manipular el carrito
@@ -43,7 +47,7 @@ export const CartProvider = ({ children }) => {
         productoId,
         cantidad,
       });
-      setCarrito(response.data); 
+      setCarrito(response.data);
       alert("Producto añadido al carrito");
     } catch (error) {
       console.error("Error al añadir:", error);
@@ -53,20 +57,22 @@ export const CartProvider = ({ children }) => {
 
   const eliminarDelCarrito = async (productoId) => {
     try {
-      const response = await axios.delete(`${API_URL}/eliminaritem/${productoId}`);
-      setCarrito(response.data); 
+      const response = await axios.delete(
+        `${API_URL}/eliminaritem/${productoId}`,
+      );
+      setCarrito(response.data);
     } catch (error) {
       console.error("Error al eliminar:", error);
     }
   };
 
   const actualizarCantidad = async (productoId, nuevaCantidad) => {
-    if (nuevaCantidad < 1) return; 
+    if (nuevaCantidad < 1) return;
 
     try {
       const response = await axios.put(`${API_URL}/actualizarcantidad`, {
         productoId,
-        cantidad: nuevaCantidad
+        cantidad: nuevaCantidad,
       });
       setCarrito(response.data);
     } catch (error) {
@@ -74,22 +80,24 @@ export const CartProvider = ({ children }) => {
     }
   };
   // Calculo el total de items en el carrito
-  const totalItems = carrito?.items?.reduce((acc, item) => acc + item.cantidad, 0) || 0;
+  const totalItems =
+    carrito?.items?.reduce((acc, item) => acc + item.cantidad, 0) || 0;
   // Función para realizar la compra
   const comprar = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
 
     try {
-      const response = await axios.post("http://localhost:8080/api/pedidos/checkout");
-      
-      setCarrito({ items: [] }); 
-      
-      return response.data; 
+      const response = await axios.post(
+        "http://localhost:8080/api/pedidos/checkout",
+      );
 
+      setCarrito({ items: [] });
+
+      return response.data;
     } catch (error) {
       console.error("Error al realizar el pedido:", error);
-      throw error; 
+      throw error;
     }
   };
 
@@ -101,7 +109,7 @@ export const CartProvider = ({ children }) => {
         agregarAlCarrito,
         eliminarDelCarrito,
         actualizarCantidad,
-        cargarCarrito, 
+        cargarCarrito,
         totalItems,
         comprar,
       }}

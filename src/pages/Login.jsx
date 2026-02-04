@@ -14,10 +14,12 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,17 +32,16 @@ function Login() {
         "http://localhost:8080/api/auth/login",
         {
           email,
-          password,
+          password
         }
       );
 
-      const token = response.data.token;
-      // Guardo el token en localStorage
-      localStorage.setItem("token", token);
+      if (response.data.token) {
+        login(response.data.token);
+      }
 
       navigate("/");
       alert("✅ Usuario logeado con éxito");
-
     } catch (err) {
       alert("❌ Usuario o contraseña incorrectos/as.");
       console.error("Error al logear:", err);
@@ -49,11 +50,7 @@ function Login() {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      style={{ padding: "40px" }}
-    >
+    <Container component="main" maxWidth="xs" style={{ padding: "40px" }}>
       <Box
         sx={{
           marginTop: 8,

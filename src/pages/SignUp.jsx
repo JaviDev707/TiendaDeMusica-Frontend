@@ -5,10 +5,14 @@ import {
   TextField, Button, FormControlLabel, Checkbox
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function SignUp() {
 
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,15 +24,21 @@ function SignUp() {
       const response = await axios.post("http://localhost:8080/api/auth/register", {
         email,
         password,
+        nombre : data.get("nombre"),
+        apellido : data.get("apellido"),
+        codigoPostal : data.get("codigoPostal"),
+        localidad : data.get("localidad"),
+        direccion : data.get("direccion")
       });
 
       const token = response.data.token;
 
-      // Guardo el token en localStorage 
-      localStorage.setItem("token", token);
+      // Usamos la función login de nuestro AuthContext
+      login(token);
 
-      console.log("Usuario registrado ✅, token:", token);
+      console.log("Usuario registrado ✅");
       alert("✅ Usuario registrado con éxito");
+      navigate("/"); 
 
     } catch (err) {
       if (err.response && err.response.status === 400) {
@@ -63,7 +73,7 @@ function SignUp() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -73,10 +83,50 @@ function SignUp() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="nombre"
+            label="Nombre"
+            name="nombre"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="apellido"
+            label="Apellidos"
+            name="apellido"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="codigoPostal"
+            label="Código Postal"
+            name="codigoPostal"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="localidad"
+            label="Localidad"
+            name="localidad"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="direccion"
+            label="Dirección"
+            name="direccion"
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

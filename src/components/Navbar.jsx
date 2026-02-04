@@ -1,9 +1,12 @@
 import "../css/NavFootBar.css";
 import { FaCartShopping } from "react-icons/fa6";
+import { GrLogout } from "react-icons/gr";
 import { useCart } from "../context/CartContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const Navbar = () => {
   const { totalItems } = useCart();
+  const { isAuthenticated, logout } = useAuth();
 
   return (
     <>
@@ -16,7 +19,13 @@ const Navbar = () => {
             <FaCartShopping /> {totalItems > 0 ? ` (${totalItems})` : ""}
           </a>
           <a href="/profile">Perfil</a>
-          <a href="/login">Login</a>
+          {isAuthenticated ? (
+            <button onClick={logout} className="logout-button">
+              <GrLogout /> 
+            </button>
+          ) : (
+            <a href="/login">Login</a>
+          )}
         </ul>
       </nav>
       <hr />

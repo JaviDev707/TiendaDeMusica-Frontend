@@ -9,27 +9,30 @@ import Login from "./pages/Login.jsx";
 import SignUp from "./pages/SignUp.jsx";
 
 import "./css/App.css";
-import { CartProvider} from "./context/CartContext.jsx";
-import "./api/AxiosConfig.jsx"; 
+import { CartProvider } from "./context/CartContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import "./api/AxiosConfig.jsx";
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
-        <Navbar />
-        <main className="app-main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/catalog" element={<Catalog />} />
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-          </Routes>
-        </main>
-        <Footbar />
-      </Router>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Navbar />
+          <main className="app-main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/catalog" element={<Catalog />} />
+              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+            </Routes>
+          </main>
+          <Footbar />
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 
