@@ -1,4 +1,5 @@
 import { useCart } from "../context/CartContext";
+import { useNotification } from "../context/NotificationContext.jsx";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Typography, Box, Button, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
@@ -8,11 +9,13 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import "../css/Cart.css";
 import { ClipLoader } from "react-spinners";
 
+
 const Cart = () => {
 
   const { carrito, eliminarDelCarrito, actualizarCantidad, loading, comprar } = useCart();
   const navigate = useNavigate(); 
   const [isProcessing, setIsProcessing] = useState(false);
+  const { showNotification } = useNotification();
 
   if (loading) return ( 
     <ClipLoader size={100} color={"#123"} loading={loading} />
@@ -34,10 +37,10 @@ const Cart = () => {
     setIsProcessing(true);
     try {
       await comprar();
-      alert("¡Pedido realizado con éxito! 🎸");
-      navigate("/catalog"); 
+      showNotification("✅ Pedido realizado con éxito!", "success");
+      navigate("/profile"); 
     } catch (error) {
-      alert("Hubo un error al procesar tu pedido. Inténtalo de nuevo.");
+      showNotification("❌ Hubo un error al procesar su pedido. Inténtalo de nuevo.", "error");
     } finally {
       setIsProcessing(false);
     }
@@ -47,7 +50,7 @@ const Cart = () => {
 
   return (
     <Container maxWidth="lg" className="cart-container">
-      <Typography variant="h4" className="cart-title">
+      <Typography variant="h4" className="cart-title" color="darkslateblue">
         Tu Carrito de Compra
       </Typography>
 

@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar">
-        <h1 className="logo">Mi Tienda de Música</h1>
+        <h1 className="logo">SeamLess Musical</h1>
         <ul className="nav-links">
           <a href="/">Inicio</a>
           <a href="/catalog">Catálogo</a>

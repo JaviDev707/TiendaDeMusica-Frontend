@@ -20,6 +20,11 @@
   margin-bottom: 20px;
 }
 
+.datos-usuario {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .perfil-info .datos-usuario {
   font-size: 1.1rem;
   color: #333;

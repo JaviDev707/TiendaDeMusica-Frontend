@@ -1,11 +1,13 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { useNotification } from "./NotificationContext.jsx";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [carrito, setCarrito] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { showNotification } = useNotification();
 
   const API_URL = "http://localhost:8080/api/carrito";
   // Función para cargar el carrito desde la API
@@ -38,7 +40,7 @@ export const CartProvider = ({ children }) => {
   const agregarAlCarrito = async (productoId, cantidad = 1) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Por favor, inicia sesión para comprar.");
+      showNotification("❌ Por favor, inicia sesión para comprar.", "warning");
       return;
     }
 
@@ -48,10 +50,10 @@ export const CartProvider = ({ children }) => {
         cantidad,
       });
       setCarrito(response.data);
-      alert("Producto añadido al carrito");
+      showNotification("✅ Producto añadido al carrito", "success");
     } catch (error) {
       console.error("Error al añadir:", error);
-      alert("Error al añadir al carrito");
+      showNotification("❌ Error al añadir al carrito", "error");
     }
   };
 

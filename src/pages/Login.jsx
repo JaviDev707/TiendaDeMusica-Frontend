@@ -15,11 +15,13 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { useNotification } from "../context/NotificationContext";
 
 function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { showNotification } = useNotification();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,9 +43,9 @@ function Login() {
       }
 
       navigate("/");
-      alert("✅ Usuario logeado con éxito");
+      showNotification("✅ Usuario Logeado exitosamente!", "success");
     } catch (err) {
-      alert("❌ Usuario o contraseña incorrectos/as.");
+      showNotification("❌ Error al logear. Intenta de nuevo.", "error");
       console.error("Error al logear:", err);
       setError("No se pudo logear. Intenta de nuevo.");
     }

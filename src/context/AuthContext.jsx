@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useNotification } from "./NotificationContext.jsx";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
+  const { showNotification } = useNotification();
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -22,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     if (confirm("¿Desea cerrar sesión?")) {
       localStorage.removeItem("token");
       setToken(null);
-      alert("Has cerrado sesión correctamente.");
+      showNotification("✅ Sesión cerrada", "success");
     }
   };
 
