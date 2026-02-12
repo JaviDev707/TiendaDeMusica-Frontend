@@ -28,18 +28,26 @@ Bienvenido a mi proyecto de E-commerce de una Tienda de Música. Esta es una apl
 * **Autenticación JWT:** Login persistente mediante `localStorage` y `AuthContext`.
 * **Cierre de Sesión:** Limpieza de estado y notificaciones de salida.
 
+![Login](screenshots/login.png)
+
 ### 2. Catálogo Dinámico
 * **Acceso Público:** Los visitantes pueden navegar por los productos sin estar registrados.
 * **Búsqueda Avanzada:** Filtrado de productos por texto en tiempo real.
+
+![Catálogo](screenshots/catalogo.png)
 
 ### 3. Flujo de Carrito de Compras
 * **Sincronización:** Carrito gestionado en tiempo real mediante `CartContext`.
 * **Persistencia en DB:** El carrito se guarda en la base de datos para usuarios registrados.
 * **Checkout (Pedido):** Proceso de compra con validación de stock en el backend y vaciado automático del carrito.
 
+![Carrito](screenshots/carrito.png)
+
 ### 4. Perfil de Usuario e Historial
 * **Datos Personales:** Visualización de información del usuario.
 * **Historial de Pedidos:** Listado de compras realizadas agrupadas en tarjetas responsivas mediante **CSS Grid**.
+
+![Perfil de usuario](screenshots/perfil.png)
 
 ---
 
